@@ -9,9 +9,9 @@ describe AccentToAscii do
   it { expect("Tẽst".accent_to_ascii).to eq "Test" }
 
   it "does not change original string" do
-    word = "São Paulo"
-    expect(word.accent_to_ascii).to eq "Sao Paulo"
-    expect(word).to eq "São Paulo"
+    str = "São Paulo"
+    expect(str.accent_to_ascii).to eq "Sao Paulo"
+    expect(str).to eq "São Paulo"
   end
 
   context "hungarian accents" do
@@ -22,11 +22,11 @@ describe AccentToAscii do
   end
 
   context "accent_to_ascii!" do
-    let(:word) { "São Paulo" }
+    let(:str) { "São Paulo" }
 
     it "changes original string" do
-      expect(word.accent_to_ascii!).to eq "Sao Paulo"
-      expect(word).to eq "Sao Paulo"
+      expect(str.accent_to_ascii!).to eq "Sao Paulo"
+      expect(str).to eq "Sao Paulo"
     end
   end
 end
