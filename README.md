@@ -2,6 +2,8 @@
 
 Rubygem to replace accents in string into the corresponding ascii chars
 
+## Credits to [accentless](https://github.com/lucasas/accentless)
+
 ## Installation
 
 Add this line to your application's Gemfile:
