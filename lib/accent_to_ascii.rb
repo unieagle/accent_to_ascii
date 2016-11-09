@@ -24,24 +24,31 @@ module AccentToAscii
     'OE' => [188],
     'oe' => [189]
   }
+
+  class AccentToAscii
+    def self.accent_to_ascii(string)
+      string.tap do |s|
+        ACCENTS_MAPPING.each { |letter, accents| replace(s, letter, accents) }
+      end
+    end
+
+    private
+
+    def self.replace(string, letter, accents)
+      packed = accents.pack('U*')
+      regex = Regexp.new("[#{packed}]", nil)
+      string.gsub!(regex, letter)
+    end
+  end
+  
 end
 
 class String
   def accent_to_ascii(string = String.new(self))
-    string.tap do |s|
-      AccentToAscii::ACCENTS_MAPPING.each { |letter, accents| replace(s, letter, accents) }
-    end
+    AccentToAscii::AccentToAscii.accent_to_ascii(string)
   end
 
   def accent_to_ascii!
     accent_to_ascii(self)
-  end
-
-  private
-
-  def replace(string, letter, accents)
-    packed = accents.pack('U*')
-    regex = Regexp.new("[#{packed}]", nil)
-    string.gsub!(regex, letter)
   end
 end
