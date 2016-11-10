@@ -1,7 +1,6 @@
 require "accent_to_ascii/version"
 
 module AccentToAscii
-  # Your code goes here...
   ACCENTS_MAPPING = {
     'E' => [200,201,202,203],
     'e' => [232,233,234,235,7869],
@@ -25,27 +24,25 @@ module AccentToAscii
     'oe' => [189]
   }
 
-  class AccentToAscii
-    def self.accent_to_ascii(string)
-      string.tap do |s|
-        ACCENTS_MAPPING.each { |letter, accents| replace(s, letter, accents) }
-      end
+  def self.accent_to_ascii(string)
+    string.tap do |s|
+      ACCENTS_MAPPING.each { |letter, accents| replace(s, letter, accents) }
     end
+  end
 
-    private
+  private
 
-    def self.replace(string, letter, accents)
-      packed = accents.pack('U*')
-      regex = Regexp.new("[#{packed}]", nil)
-      string.gsub!(regex, letter)
-    end
+  def self.replace(string, letter, accents)
+    packed = accents.pack('U*')
+    regex = Regexp.new("[#{packed}]", nil)
+    string.gsub!(regex, letter)
   end
   
 end
 
 class String
   def accent_to_ascii(string = String.new(self))
-    AccentToAscii::AccentToAscii.accent_to_ascii(string)
+    AccentToAscii.accent_to_ascii(string)
   end
 
   def accent_to_ascii!
